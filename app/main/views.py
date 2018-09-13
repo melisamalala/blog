@@ -96,7 +96,7 @@ def single_blogpost(id):
 def blogpost_list():
     # Function that renders the business category blogpost and its content
 
-    blogpostS = Blogpost.query.all()
+    blogposts = Blogpost.query.all()
 
     return render_template('blogposts.html', blogposts=blogposts)
 

@@ -72,14 +72,13 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     post_comment = db.Column(db.String(255), index=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    blogpost = db.Column(db.Integer, db.ForeignKey('blogpost.id'))
+    blogposts = db.Column(db.Integer, db.ForeignKey('blogpost.id'))
     time = db.Column(db.DateTime, default=datetime.utcnow)
 
     def save_comment(self):
         ''' Save the comments '''
         db.session.add(self)
         db.session.commit()
-
 
     # display comments
 
