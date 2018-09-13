@@ -196,4 +196,4 @@ def view_blogpost(id):
        blogpost.likes = blogpost.likes + 1
        blogpost.save_blogpost()
        return redirect("/view/{blogpost_id}".format(blogpost_id=id))
-    return render_template('view_blogpost.html',blogpost = blogpost)
+    return render_template('viewblogpost.html',blogpost = blogpost)
