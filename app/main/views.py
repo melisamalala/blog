@@ -17,6 +17,12 @@ def index():
     title = 'WELCOME TO BLOGPOST'
     return render_template('index.html', title = title, blogposts=blogposts)
 
+@main.route('/about')
+def about():
+    """ View root page function that returns the about page """
+
+    return render_template('about.html')
+
 # VIEWING EACH SPECIFIC PROFILE
 @main.route('/user/<uname>')
 @login_required

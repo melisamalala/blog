@@ -22,7 +22,8 @@ class User(UserMixin,db.Model):
     password_hash = db.Column(db.String(255))
     blogpost = db.relationship('Blogpost', backref='user', lazy="dynamic")
     comments = db.relationship("Comment", backref="user", lazy="dynamic")
-
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+    is_admin = db.column(db.Boolean)
 
     @property
     def password(self):
@@ -37,6 +38,25 @@ class User(UserMixin,db.Model):
 
     def __repr__(self):
         return f'User {self.username}'
+
+
+class Role(db.Model):
+    """
+    Create a Role table
+    """
+
+    __tablename__ = 'roles'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(60), unique=True)
+    description = db.Column(db.String(200))
+    users = db.relationship('User', backref='role',
+                                lazy='dynamic')
+
+    def __repr__(self):
+        return '<Role: {}>'.format(self.name)
+
+
 
 class Blogpost(db.Model):
 

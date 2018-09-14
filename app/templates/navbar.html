@@ -19,6 +19,11 @@
         <li><a class="nav-item nav-link" href="{{ url_for('main.new_blogpost') }}">Submit A Blog Post</a></li>
 
         <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</a></li>
+
+
+         <li><a href="{{url_for('main.about')  }}">About</a></li>
+
+
         <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
         {% else %}
         <li><a href="{{url_for('auth.register')}}">Register</a></li>
