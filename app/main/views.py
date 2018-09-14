@@ -203,3 +203,20 @@ def view_blogpost(id):
        blogpost.save_blogpost()
        return redirect("/view/{blogpost_id}".format(blogpost_id=id))
     return render_template('viewblogpost.html',blogpost = blogpost)
+
+@main.route('/dashboard')
+@login_required
+def dashboard():
+    """
+    Render the dashboard template on the /dashboard route
+    """
+    return render_template('dashboard.html', title="Dashboard")
+
+@main.route('/admin/dashboard')
+@login_required
+def admin_dashboard():
+    # prevent non-admins from accessing the page
+    if not current_user.is_admin:
+        abort(403)
+
+    return render_template('admin_dashboard.html', title="Dashboard")

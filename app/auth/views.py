@@ -50,7 +50,13 @@ def login():
 
             # redirect to the index page after login
 
-            return redirect(request.args.get('next') or url_for('main.index'))
+            # redirect to the appropriate dashboard page
+            if user.is_admin:
+                return redirect(url_for('main.admin_dashboard'))
+            else:
+                return redirect(url_for('main.dashboard'))
+
+            # return redirect(request.args.get('next') or url_for('main.index'))
 
         # when login details are incorrect
 
