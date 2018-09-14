@@ -23,7 +23,7 @@ class User(UserMixin,db.Model):
     blogpost = db.relationship('Blogpost', backref='user', lazy="dynamic")
     comments = db.relationship("Comment", backref="user", lazy="dynamic")
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
-    is_admin = db.column(db.Boolean)
+    is_admin = db.Column(db.Boolean, default=False)
 
     @property
     def password(self):

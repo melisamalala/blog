@@ -87,7 +87,9 @@ def new_blogpost():
 
         # blogpost.save_blogpost(blogpost)
         print('kasambuli')
+
         flash('Your blogpost has been created!', 'success')
+
         return redirect(url_for('main.single_blogpost',id=blogpost.id))
 
     return render_template('newblogpost.html', title='New Post', blogpost_form=form, legend='New Post')
