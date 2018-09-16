@@ -125,7 +125,6 @@ def check_admin():
 def blogpost_list():
     # Function that renders the business category blogpost and its content
 
-    check_admin()
 
     blogposts = Blogpost.query.all()
 
