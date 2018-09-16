@@ -1,16 +1,16 @@
-##Project Description
+## Project Description
 
 Blog
 
-##User Story
+## User Story
 
 User should be able to read blogs, comment on them, subscribe to new posts.
 
-##UI Design
+## UI Design
 The application has a clean, simple, well-organized user interface.
 It has a consistent colour scheme and uses appropriate fonts.
 
-##Project Objectives
+## Project Objectives
 The project has a user model.
 The models implement a 1 one-many relationship.
 The project has a comment model.
@@ -19,7 +19,7 @@ The project follows the proper folder structure.
 The project has a functioning authentication system.
 The project contains migration files for the different model structure.
 
-##Technical Requirements
+## Technical Requirements
 
 All the models contain unittests to test the different behaviours. All tests pass.
 The project is deployed to Heroku.
