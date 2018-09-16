@@ -66,6 +66,15 @@ def update_pic(uname):
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
 
+
+def check_admin():
+    """
+    Prevent non-admins from accessing the page
+    """
+    if not current_user.is_admin:
+        abort(403)
+
+
 # ADDING A NEW BLOGPOST
 @main.route('/blogpost/new', methods=['GET','POST'])
 @login_required
@@ -74,12 +83,8 @@ def new_blogpost():
         Add a department to the database
         """
     check_admin()
-
     new_blogpost = True
-
-
     form = BlogpostForm()
-
     if form.validate_on_submit():
 
         title=form.title.data
@@ -103,6 +108,8 @@ def new_blogpost():
     return render_template('newblogpost.html',
                            title='New Post',
                            blogpost_form=form,
+                           new_blogpost=new_blogpost,
+                           action="Add",
                            legend='New Post')
 
 # VIEW INDIVIDUAL BLOGPOST
@@ -113,18 +120,11 @@ def single_blogpost(id):
                            blogpost = blogpost)
 
 
-def check_admin():
-    """
-    Prevent non-admins from accessing the page
-    """
-    if not current_user.is_admin:
-        abort(403)
 
 
 @main.route('/allblogposts')
 def blogpost_list():
-    # Function that renders the business category blogpost and its content
-
+    # Function that renders all the blogposts and its content
 
     blogposts = Blogpost.query.all()
 
@@ -159,24 +159,26 @@ def blogpost(blogpost_id):
 
 @main.route('/blogpost/delete/<int:blogpost_id>' ,methods=['GET', 'POST'])
 @login_required
-def deleteblogpost(blogpost_id):
+def delete_blogpost(blogpost_id):
     """
         Delete a department from the database
         """
 
     check_admin()
 
-    blogpost = Blogpost.query.filter_by(id=blogpost_id).one()
+    blogpost = Blogpost.query.filter_by(blogpost_id).one()
     db.session.delete(blogpost)
     db.session.commit()
-    return redirect(url_for('.index',
-                            blogpost=blogpost,
-                            blogpost_id=blogpost.id))
+
+    flash('You have successfully deleted the department.')
+
+    return redirect(url_for('main.blogpost_list', blogpost_id=blogpost.id))
 
 
 # ADDING A NEW COMMENT TO A blogpost
 @main.route('/blogpost/comment/new/<int:id>', methods = ['GET','POST'])
 @login_required
+
 def new_comment(id):
     '''
     view category that returns a form to create a new comment
@@ -204,7 +206,6 @@ def new_comment(id):
                            title = title,
                            comment_form = form,
                            blogpost = blogpost)
-
 # UPDATING A blogpost
 
 @main.route('/blogpost/<int:blogpost_id>/update', methods=['GET','POST'])
@@ -225,8 +226,6 @@ def update_blogpost(blogpost_id):
         form.content.data = blogpost.content
     return render_template('newblogpost.html', title='Update blogpost', form=form, legend='Update blogpost')
 
-
-
 # EDIT A BLOGPOST
 @main.route('/blogpost/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -238,7 +237,6 @@ def edit_blogpost(id):
 
     new_blogpost = False
 
-
     blogpost = Blogpost.query.get_or_404(id)
     form = BlogpostForm(obj=blogpost)
     if form.validate_on_submit():
@@ -248,31 +246,13 @@ def edit_blogpost(id):
         flash('You have successfully edited the blogpost.')
 
         # redirect to the departments page
-        return redirect(url_for('main.blogpost_list'))
+        return redirect(url_for('main.blogpost_list', blogpost_id=blogpost.id))
 
     form.content.data = blogpost.content
     form.title.data = blogpost.title
     return render_template('newblogpost.html', action="Edit",
                            new_blogpost=new_blogpost, blogpost_form=form,
                            blogpost=blogpost, title="Edit Department")
-
-
-#
-# # DELETING A blogpost
-# @main.route('/blogpost/<int:blogpost_id>/delete', methods=['GET', 'POST'])
-# @login_required
-# def delete_blogpost(blogpost_id):
-#     blogpost = Blogpost.query.get_or_404(blogpost_id)
-#     for comment in blogpost.comments.all():
-#         db.session.delete(comment)
-#         db.session.commit()
-#     if blogpost.author != current_user:
-#         abort(403)
-#     db.session.delete(blogpost)
-#     db.session.commit()
-#     flash('Your blogpost has been deleted!', 'success')
-#     return redirect(url_for('main.blogposts'))
-
 
 # VIEWING A SPECIFIC blogpost
 @main.route("/view/<id>", methods=["GET","POST"])

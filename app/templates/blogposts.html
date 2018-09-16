@@ -4,7 +4,13 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans|Noto+Serif+KR|Oswald" rel="stylesheet">
 <div class="jumbotron" style="text-align:center; background-color:white;">
 <h1 style="font-family:
+
+
 'Open Sans', sans-serif;">GENERAL BLOGPOSTS</h1>
+
+
+
+
 {% for blogpost in blogposts %}
 <article class="media content-section">
   <div class="media-body">
@@ -16,6 +22,21 @@
     <h2><a class="article-title" href="{{ url_for('main.blogpost', blogpost_id=blogpost.id) }}">{{ blogpost.title }}</a></h2>
     <p class="article-content">{{ blogpost.content }}</p>
      <p class="article-content">{{ blogpost.category_id }}</p>
+    <td>
+
+
+                    <a href="/blogpost/edit/{{blogpost.id}}">
+                      <i class="fa fa-pencil"></i> Edit
+                    </a>
+                  </td>
+                  <td>
+                    <a href="/blogpost/delete/{{blogpost.id}}">
+                      <i class="fa fa-trash"></i> Delete
+                    </a>
+                  </td>
+
+
+
   </div>
 </article>
 {% endfor %}
