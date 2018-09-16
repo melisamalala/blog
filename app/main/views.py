@@ -70,6 +70,14 @@ def update_pic(uname):
 @main.route('/blogpost/new', methods=['GET','POST'])
 @login_required
 def new_blogpost():
+    """
+        Add a department to the database
+        """
+    check_admin()
+
+    new_blogpost = True
+
+
     form = BlogpostForm()
 
     if form.validate_on_submit():
@@ -92,17 +100,32 @@ def new_blogpost():
 
         return redirect(url_for('main.single_blogpost',id=blogpost.id))
 
-    return render_template('newblogpost.html', title='New Post', blogpost_form=form, legend='New Post')
+    return render_template('newblogpost.html',
+                           title='New Post',
+                           blogpost_form=form,
+                           legend='New Post')
 
 # VIEW INDIVIDUAL BLOGPOST
 @main.route('/blogpost/new/<int:id>')
 def single_blogpost(id):
     blogpost = Blogpost.query.get(id)
-    return render_template('singleblogpost.html',blogpost = blogpost)
+    return render_template('singleblogpost.html',
+                           blogpost = blogpost)
+
+
+def check_admin():
+    """
+    Prevent non-admins from accessing the page
+    """
+    if not current_user.is_admin:
+        abort(403)
+
 
 @main.route('/allblogposts')
 def blogpost_list():
     # Function that renders the business category blogpost and its content
+
+    check_admin()
 
     blogposts = Blogpost.query.all()
 
@@ -124,7 +147,6 @@ def blogpost(blogpost_id):
                                     user=current_user)
         # new_post_comment.save_post_comments()
 
-
         db.session.add(new_blogpost_comment)
         db.session.commit()
     # comments = Comment.query.all()
@@ -135,6 +157,23 @@ def blogpost(blogpost_id):
                            blogpost=blogpost,
                            blogpost_form=form,
                            comments=comments)
+
+@main.route('/blogpost/delete/<int:blogpost_id>' ,methods=['GET', 'POST'])
+@login_required
+def deleteblogpost(blogpost_id):
+    """
+        Delete a department from the database
+        """
+
+    check_admin()
+
+    blogpost = Blogpost.query.filter_by(id=blogpost_id).one()
+    db.session.delete(blogpost)
+    db.session.commit()
+    return redirect(url_for('.index',
+                            blogpost=blogpost,
+                            blogpost_id=blogpost.id))
+
 
 # ADDING A NEW COMMENT TO A blogpost
 @main.route('/blogpost/comment/new/<int:id>', methods = ['GET','POST'])
@@ -162,7 +201,10 @@ def new_comment(id):
         return redirect(url_for('.blogposts', id = blogpost.id ))
 
     title = f'{blogpost.title} comment'
-    return render_template('newcomment.html', title = title, comment_form = form, blogpost = blogpost, )
+    return render_template('newcomment.html',
+                           title = title,
+                           comment_form = form,
+                           blogpost = blogpost)
 
 # UPDATING A blogpost
 
@@ -184,20 +226,54 @@ def update_blogpost(blogpost_id):
         form.content.data = blogpost.content
     return render_template('newblogpost.html', title='Update blogpost', form=form, legend='Update blogpost')
 
-# DELETING A blogpost
-@main.route('/blogpost/<int:blogpost_id>/delete', methods=['GET', 'POST'])
+
+
+# EDIT A BLOGPOST
+@main.route('/blogpost/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
-def delete_blogpost(blogpost_id):
-    blogpost = Blogpost.query.get_or_404(blogpost_id)
-    for comment in blogpost.comments.all():
-        db.session.delete(comment)
+def edit_blogpost(id):
+    """
+    Edit a blogpost
+    """
+    check_admin()
+
+    new_blogpost = False
+
+
+    blogpost = Blogpost.query.get_or_404(id)
+    form = BlogpostForm(obj=blogpost)
+    if form.validate_on_submit():
+        blogpost.title = form.title.data
+        blogpost.content = form.content.data
         db.session.commit()
-    if blogpost.author != current_user:
-        abort(403)
-    db.session.delete(blogpost)
-    db.session.commit()
-    flash('Your blogpost has been deleted!', 'success')
-    return redirect(url_for('main.blogposts'))
+        flash('You have successfully edited the blogpost.')
+
+        # redirect to the departments page
+        return redirect(url_for('main.blogpost_list'))
+
+    form.content.data = blogpost.content
+    form.title.data = blogpost.title
+    return render_template('newblogpost.html', action="Edit",
+                           new_blogpost=new_blogpost, blogpost_form=form,
+                           blogpost=blogpost, title="Edit Department")
+
+
+#
+# # DELETING A blogpost
+# @main.route('/blogpost/<int:blogpost_id>/delete', methods=['GET', 'POST'])
+# @login_required
+# def delete_blogpost(blogpost_id):
+#     blogpost = Blogpost.query.get_or_404(blogpost_id)
+#     for comment in blogpost.comments.all():
+#         db.session.delete(comment)
+#         db.session.commit()
+#     if blogpost.author != current_user:
+#         abort(403)
+#     db.session.delete(blogpost)
+#     db.session.commit()
+#     flash('Your blogpost has been deleted!', 'success')
+#     return redirect(url_for('main.blogposts'))
+
 
 # VIEWING A SPECIFIC blogpost
 @main.route("/view/<id>", methods=["GET","POST"])
