@@ -127,7 +127,10 @@ def blogpost(blogpost_id):
 
         db.session.add(new_blogpost_comment)
         db.session.commit()
-    comments = Comment.query.all()
+    # comments = Comment.query.all()
+    # blogpost_id = id
+
+    comments = Comment.get_comments(blogpost_id)
     return render_template('blogpostlink.html', title=blogpost.title,
                            blogpost=blogpost,
                            blogpost_form=form,
