@@ -22,18 +22,17 @@
     <h2><a class="article-title" href="{{ url_for('main.blogpost', blogpost_id=blogpost.id) }}">{{ blogpost.title }}</a></h2>
     <p class="article-content">{{ blogpost.content }}</p>
      <p class="article-content">{{ blogpost.category_id }}</p>
-    <td>
 
 
-                    <a href="/blogpost/edit/{{blogpost.id}}">
-                      <i class="fa fa-pencil"></i> Edit
-                    </a>
-                  </td>
-                  <td>
-                    <a href="/blogpost/delete/{{blogpost.id}}">
-                      <i class="fa fa-trash"></i> Delete
-                    </a>
-                  </td>
+<button type="button" class="btn btn-success btn-lg"><a href="/blogpost/edit/{{blogpost.id}}">
+
+                    Edit</a></button>
+
+      <button type="button" class="btn btn-warning btn-lg"><a href="/blogpost/delete/{{blogpost.id}}">
+
+                    Delete</a></button>
+
+
 
 
 

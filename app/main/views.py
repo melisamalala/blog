@@ -166,7 +166,9 @@ def delete_blogpost(blogpost_id):
 
     check_admin()
 
-    blogpost = Blogpost.query.filter_by(blogpost_id).one()
+    blogpost = Blogpost.query.get_or_404(blogpost_id)
+
+    # blogpost = Blogpost.query.filter_by(blogpost_id).one()
     db.session.delete(blogpost)
     db.session.commit()
 
