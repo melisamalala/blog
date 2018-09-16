@@ -1,38 +1,44 @@
 {% extends 'base.html' %} {% import 'bootstrap/wtf.html' as wtf %} {% block content %}
 
-<div class="jumbotron" style="text-align:center";>
-<h1>GENERAL BLOGPOSTS</h1>
-<article class="media content-section">
-  <div class="media-body">
-    <div class="article-metadata">
-      <a class="mr-2" href="#">{{ blogpost.user_id.username }}</a>
-      <small class="text-muted">{{ blogpost.time }}</small>
+<div class="jumbotron" style="text-align:center" ;>
+  <h1>GENERAL BLOGPOSTS</h1>
+  <article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ blogpost.user_id.username }}</a>
+        <small class="text-muted">{{ blogpost.time }}</small>
 
+      </div>
+      <h2 class="article-title">{{ blogpost.title }}</h2>
+      <p class="article-content">{{ blogpost.content }}</p>
     </div>
-    <h2 class="article-title">{{ blogpost.title }}</h2>
-    <p class="article-content">{{ blogpost.content }}</p>
-  </div>
 
 
-</article>
+  </article>
 
 
-{{wtf.quick_form(blogpost_form)}}
-
-  {% for comment in comments[::-1] %}
+  {{wtf.quick_form(blogpost_form)}} {% for comment in comments[::-1] %}
 
 
   <article class="">
-  <div class="media-body">
-    <div class="article-metadata">
-      <a class="mr-2" href="#">{{ blogpost.user.username }}</a>
-      <small class="text-muted">{{ blogpost.pitches }}</small>
-    </div>
-    <p class="article-content">{{ comment.post_comment }}</p>
-  </div>
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ blogpost.user.username }}</a>
+        <small class="text-muted">{{ blogpost.title }}</small>
+      </div>
+      <p class="article-content">{{ comment.post_comment }}</p>
+      <small class="text-muted">{{ blogpost.time }}</small>
 
-</article>
-{% endfor %}
+       <button type="button" class="btn btn-warning btn-lg">
+         <a href="/comment/delete/{{comment.blogposts}}">Delete Comment</a></button>
+
+
+
+
+    </div>
+
+  </article>
+  {% endfor %}
 
 </div>
 {% endblock content %}

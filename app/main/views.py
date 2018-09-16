@@ -120,8 +120,6 @@ def single_blogpost(id):
                            blogpost = blogpost)
 
 
-
-
 @main.route('/allblogposts')
 def blogpost_list():
     # Function that renders all the blogposts and its content
@@ -141,7 +139,6 @@ def blogpost(blogpost_id):
         comment = form.comment.data
         new_blogpost_comment = Comment(post_comment=comment,
                                        blogposts=blogpost_id,
-
                                     # user_id=current_user.id,
                                     user=current_user)
         # new_post_comment.save_post_comments()
@@ -157,13 +154,15 @@ def blogpost(blogpost_id):
                            blogpost_form=form,
                            comments=comments)
 
+
+# DELETING A BLOGPOST
+
 @main.route('/blogpost/delete/<int:blogpost_id>' ,methods=['GET', 'POST'])
 @login_required
 def delete_blogpost(blogpost_id):
     """
         Delete a department from the database
         """
-
     check_admin()
 
     blogpost = Blogpost.query.get_or_404(blogpost_id)
@@ -176,6 +175,30 @@ def delete_blogpost(blogpost_id):
 
     return redirect(url_for('main.blogpost_list', blogpost_id=blogpost.id))
 
+
+# DELETING A COMMENT INSIDE A BLOGPOST
+@main.route('/comment/delete/<int:blogpost_id>' ,methods=['GET', 'POST'])
+@login_required
+def delete_comment(blogposts):
+    """
+        Delete a comment from a specific blogpost
+        """
+    check_admin()
+
+    blogpost = Blogpost.query.filter_by(blogpost_id=blogposts).first()
+    comment= Comment.query.filter_by(blogposts=blogposts).first()
+
+    db.session.delete(comment)
+    db.session.commit()
+
+    print('deleted')
+
+    flash('You have successfully deleted the comment!')
+
+    return redirect(url_for('main.blogpost',
+                            blogpost=blogpost,
+                            comment=comment,
+                            blogposts=blogpost.id))
 
 # ADDING A NEW COMMENT TO A blogpost
 @main.route('/blogpost/comment/new/<int:id>', methods = ['GET','POST'])
@@ -208,25 +231,6 @@ def new_comment(id):
                            title = title,
                            comment_form = form,
                            blogpost = blogpost)
-# UPDATING A blogpost
-
-@main.route('/blogpost/<int:blogpost_id>/update', methods=['GET','POST'])
-@login_required
-def update_blogpost(blogpost_id):
-    blogpost = Blogpost.query.get_or_404(blogpost_id)
-    if blogpost.author != current_user:
-        abort(403)
-    form = BlogpostForm()
-    if form.validate_on_submit():
-        blogpost.title = form.title.data
-        blogpost.content = form.content.data
-        db.session.commit()
-        flash('Your post has been updated!', 'success')
-        return redirect(url_for('main.blogpostlink', blogpost_id=blogpost.id))
-    elif request.method == 'GET':
-        form.title.data = blogpost.title
-        form.content.data = blogpost.content
-    return render_template('newblogpost.html', title='Update blogpost', form=form, legend='Update blogpost')
 
 # EDIT A BLOGPOST
 @main.route('/blogpost/edit/<int:id>', methods=['GET', 'POST'])
@@ -256,15 +260,6 @@ def edit_blogpost(id):
                            new_blogpost=new_blogpost, blogpost_form=form,
                            blogpost=blogpost, title="Edit Department")
 
-# VIEWING A SPECIFIC blogpost
-@main.route("/view/<id>", methods=["GET","POST"])
-def view_blogpost(id):
-    blogpost = Blogpost.query.get(id)
-    if request.args.get("vote"):
-       blogpost.likes = blogpost.likes + 1
-       blogpost.save_blogpost()
-       return redirect("/view/{blogpost_id}".format(blogpost_id=id))
-    return render_template('viewblogpost.html',blogpost = blogpost)
 
 @main.route('/dashboard')
 @login_required

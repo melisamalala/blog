@@ -6,8 +6,8 @@
 <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
 
 <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-{% endblock %}
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+    rel='stylesheet' type='text/css'> {% endblock %}
 
 
 
@@ -26,19 +26,21 @@ background-color:white; font-family:
                 <br>
                 <br>
                 <div class="jumbo" style="font-family: 'Oswald', sans-serif;">
-                <button type="button" class="btn btn-warning btn-lg" style="color; white;"><a href="auth/register">Register An Account</a></button>
-                <br>
-                <br>
-                <button type="button" class="btn btn-warning btn-lg text-white"><a href="auth/login">Sign In</a></button>
-                 <br>
-                <br>
-                <button type="button" class="btn btn-warning btn-lg"><a href="/blogpost/new">Write A Blog Post</a></button>
-                 <br>
-                <br>
-                <button type="button" class="btn btn-warning btn-lg"><a href="{{url_for('main.blogpost_list')}}">View Blogposts</a></button>
-                <br>
-                <br>
-</div>
+                    <button type="button" class="btn btn-warning btn-lg" style="color; white;"><a href="auth/register">Register
+                            An Account</a></button>
+                    <br>
+                    <br>
+                    <button type="button" class="btn btn-warning btn-lg text-white"><a href="auth/login">Sign In</a></button>
+                    <br>
+                    <br>
+                    <button type="button" class="btn btn-warning btn-lg"><a href="/blogpost/new">Write A Blog Post</a></button>
+                    <br>
+                    <br>
+                    <button type="button" class="btn btn-warning btn-lg"><a href="{{url_for('main.blogpost_list')}}">View
+                            Blogposts</a></button>
+                    <br>
+                    <br>
+                </div>
             </h3>
         </div>
 
@@ -46,11 +48,11 @@ background-color:white; font-family:
 </div>
 
 <div id="body">
-  <nav class="navbar navbar-dark mt-0 mb-0 fixed-bottom text-dark">
-    <div class="navbar-expand m-auto navbar-text text-dark">
-      Made by <a href="https://twitter.com/melisamalala">Melissa Malala</a>
-    </div>
-  </nav>
+    <nav class="navbar navbar-dark mt-0 mb-0 fixed-bottom text-dark">
+        <div class="navbar-expand m-auto navbar-text text-dark">
+            Made by <a href="https://twitter.com/melisamalala">Melissa Malala</a>
+        </div>
+    </nav>
 </div>
 
 

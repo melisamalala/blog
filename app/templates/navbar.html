@@ -13,8 +13,7 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        {% if current_user.is_authenticated %}
-        {% if current_user.is_admin %}
+        {% if current_user.is_authenticated %} {% if current_user.is_admin %}
 
         <li><a href="{{ url_for('main.admin_dashboard') }}">Dashboard</a></li>
 
@@ -22,7 +21,7 @@
 
         <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</a></li>
 
-         <li><a href="{{url_for('main.about')  }}">About</a></li>
+        <li><a href="{{url_for('main.about')  }}">About</a></li>
 
         {% else %}
 
@@ -31,12 +30,12 @@
         <li><a href="{{ url_for('main.dashboard') }}">Dashboard</a></li>
 
 
-      {% endif %}
+        {% endif %}
 
         <li><a href="{{url_for('auth.logout')}}">Log out</a></li>
-         <li><a class="nav-item nav-link" href="{{ url_for('main.new_blogpost') }}">Submit A Blog Post</a></li>
+        <li><a class="nav-item nav-link" href="{{ url_for('main.new_blogpost') }}">Submit A Blog Post</a></li>
 
-      <li><a><i class="fa fa-user"></i>  Hi, {{ current_user.username }}!</a></li>
+        <li><a><i class="fa fa-user"></i> Hi, {{ current_user.username }}!</a></li>
 
 
         {% else %}

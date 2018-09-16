@@ -1,13 +1,5 @@
- {% extends 'base.html'%} {% import "bootstrap/wtf.html" as wtf %}
- {% block title %}
-    {% if add_department %}
-        Add Department
-    {% else %}
-        Edit Department
-    {% endif %}
-{% endblock %}
-
- {% block content %}
+ {% extends 'base.html'%} {% import "bootstrap/wtf.html" as wtf %} {% block title %} {% if add_department %} Add Department
+{% else %} Edit Department {% endif %} {% endblock %} {% block content %}
 
 
 <div class="jumbotron" style="text-align:center; background-color:white;">
@@ -17,13 +9,11 @@
         <div class="col-md-4">
 
             {% if new_blogpost %}
-                <h1>Add Blogpost</h1>
+            <h1>Add Blogpost</h1>
             {% else %}
-                <h1>Edit Blogpost</h1>
+            <h1>Edit Blogpost</h1>
             {% endif %}
-            <br/>
-
-            {{ wtf.quick_form(blogpost_form) }} {{simplemde.load}}
+            <br/> {{ wtf.quick_form(blogpost_form) }} {{simplemde.load}}
         </div>
 
     </div>
