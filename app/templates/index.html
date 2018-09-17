@@ -5,10 +5,16 @@
 {% block styles%} {{ super() }}
 <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
 
+<!-- Bootstrap core CSS -->
+<!--<link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">-->
+
+<!-- Custom fonts for this template -->
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Noto+Serif+KR|Oswald" rel="stylesheet">
+<link href="{{ url_for('static', filename='font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
     rel='stylesheet' type='text/css'> {% endblock %}
-
 
 
 <!-- Content block -->
@@ -16,8 +22,13 @@
 {% block content %}
 
 
+    here
 
-<link href="https://fonts.googleapis.com/css?family=Open+Sans|Noto+Serif+KR|Oswald" rel="stylesheet">
+    <img class="image1" src="../photos/img1.jpg" alt="">
+
+
+
+
 <div class="jumbotron mt-0 mb-0" style="text-align: center;
 background-color:white; font-family:
 'Open Sans', sans-serif;">

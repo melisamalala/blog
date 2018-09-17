@@ -27,12 +27,13 @@
         <small class="text-muted">{{ blogpost.title }}</small>
       </div>
       <p class="article-content">{{ comment.post_comment }}</p>
+       <p class="article-content">{{ comment.id }}</p>
+
       <small class="text-muted">{{ blogpost.time }}</small>
 
+
        <button type="button" class="btn btn-warning btn-lg">
-         <a href="/comment/delete/{{comment.blogposts}}">Delete Comment</a></button>
-
-
+         <a href={{url_for('main.delete_comment', blogpost_id = comment.blogposts)}}>Delete Comment</a></button>
 
 
     </div>

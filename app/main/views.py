@@ -179,14 +179,14 @@ def delete_blogpost(blogpost_id):
 # DELETING A COMMENT INSIDE A BLOGPOST
 @main.route('/comment/delete/<int:blogpost_id>' ,methods=['GET', 'POST'])
 @login_required
-def delete_comment(blogposts):
+def delete_comment(blogpost_id):
     """
         Delete a comment from a specific blogpost
         """
     check_admin()
 
-    blogpost = Blogpost.query.filter_by(blogpost_id=blogposts).first()
-    comment= Comment.query.filter_by(blogposts=blogposts).first()
+    blogposts = Blogpost.query.filter_by(id=blogpost_id).first()
+    comment= Comment.query.filter_by(blogposts=blogpost_id).first()
 
     db.session.delete(comment)
     db.session.commit()
@@ -195,10 +195,7 @@ def delete_comment(blogposts):
 
     flash('You have successfully deleted the comment!')
 
-    return redirect(url_for('main.blogpost',
-                            blogpost=blogpost,
-                            comment=comment,
-                            blogposts=blogpost.id))
+    return redirect(url_for('main.index'))
 
 # ADDING A NEW COMMENT TO A blogpost
 @main.route('/blogpost/comment/new/<int:id>', methods = ['GET','POST'])
