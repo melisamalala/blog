@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3b09b011-5569-4386-8e2b-f1b46410df37" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/blogpostlink.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/blogpostlink.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/start.sh" beforeDir="false" afterPath="$PROJECT_DIR$/start.sh" afterDir="false" />
-    </list>
+    <list default="true" id="3b09b011-5569-4386-8e2b-f1b46410df37" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +48,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="1081" />
+          <entry key="HTML" value="1082" />
           <entry key="Markdown" value="93" />
           <entry key="PLAIN_TEXT" value="81" />
           <entry key="Python" value="2094" />
@@ -66,7 +59,7 @@
           <entry key="Procfile" value="3" />
           <entry key="Python Console" value="1" />
           <entry key="gitignore" value="25" />
-          <entry key="html" value="1081" />
+          <entry key="html" value="1082" />
           <entry key="md" value="93" />
           <entry key="py" value="2093" />
           <entry key="sh" value="19" />
@@ -130,8 +123,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/templates/blogpostlink.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="539">
-              <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+            <state relative-caret-position="105">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
               </folding>
@@ -286,8 +279,8 @@
         <option value="$PROJECT_DIR$/app/templates/index.html" />
         <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/manage.py" />
-        <option value="$PROJECT_DIR$/app/templates/blogpostlink.html" />
         <option value="$PROJECT_DIR$/app/main/views.py" />
+        <option value="$PROJECT_DIR$/app/templates/blogpostlink.html" />
       </list>
     </option>
   </component>
@@ -433,14 +426,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="268" y="23" width="1513" height="665" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15616623" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" weight="0.32984293" />
       <window_info anchor="bottom" id="Python Console" weight="0.32984293" />
-      <window_info active="true" anchor="bottom" id="Terminal" sideWeight="0.49913645" visible="true" weight="0.35253054" />
+      <window_info active="true" anchor="bottom" id="Terminal" sideWeight="0.49913645" visible="true" weight="0.5026178" />
       <window_info anchor="bottom" id="Event Log" sideWeight="0.50086355" side_tool="true" weight="0.42941177" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3294509" />
@@ -822,8 +814,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/blogpostlink.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="105">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
           <folding>
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
           </folding>
